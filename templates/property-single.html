@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% block title %} Property Detail {% endblock %}
+{% block content %}
+{% load static %}
+
+
+    <div class="section">
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-lg-12 p-5">
+            <h2 class="heading text-primary">{{ property.name }}</h2>
+            <p class="meta">Address: {{ property.address }}</p>
+            {% if property.location %}
+              <p class="meta">Location: {{ property.location|urlize }}</p>
+            {% endif %}
+            {% if property.features %}
+            <p class="text-black-50">Features and Amenities: {{ property.features }}</p>
+            {% endif %}
+
+            <div class="d-block agent-box p-5">
+              {% comment %} <div class="img mb-4">
+                <img
+                  src="images/person_2-min.jpg"
+                  alt="Image"
+                  class="img-fluid"
+                />
+              </div> {% endcomment %}
+              <div class="text">
+                <h3 class="mb-0">Units of this property:</h3>
+                {% if property.units %}
+                {% for unit in property.units.all  %}
+                  <div class="meta mb-2">
+                    {{ unit.type }}:
+
+                    {% for rental_info in unit.rentalinformation_set.all %}
+                        {# Access TenantProfile properties through the RentalInformation instance #}
+                        assigned to -  <a href="{{ rental_info.tenant.get_absolute_url }}">{{ rental_info.tenant.name }} (Click to view tenant profile)</a>
+                        {# Other properties of the TenantProfile #}
+                        {% empty %}
+                        Unassigned and Available
+                    {% endfor %}
+
+                  </div>
+                {% endfor %}
+                {% endif %}
+                {% comment %} <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Ratione laborum quo quos omnis sed magnam id ducimus saepe
+                </p>
+                <ul class="list-unstyled social dark-hover d-flex">
+                  <li class="me-1">
+                    <a href="#"><span class="icon-instagram"></span></a>
+                  </li>
+                  <li class="me-1">
+                    <a href="#"><span class="icon-twitter"></span></a>
+                  </li>
+                  <li class="me-1">
+                    <a href="#"><span class="icon-facebook"></span></a>
+                  </li>
+                  <li class="me-1">
+                    <a href="#"><span class="icon-linkedin"></span></a>
+                  </li>
+                </ul> {% endcomment %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Contact</h3>
+              <address>43 Raymouth Rd. Baltemoer, London 3910</address>
+              <ul class="list-unstyled links">
+                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
+                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
+                <li>
+                  <a href="mailto:info@mydomain.com">info@mydomain.com</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Sources</h3>
+              <ul class="list-unstyled float-start links">
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Vision</a></li>
+                <li><a href="#">Mission</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Privacy</a></li>
+              </ul>
+              <ul class="list-unstyled float-start links">
+                <li><a href="#">Partners</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Creative</a></li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Links</h3>
+              <ul class="list-unstyled links">
+                <li><a href="#">Our Vision</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+              </ul>
+
+              <ul class="list-unstyled social">
+                <li>
+                  <a href="#"><span class="icon-instagram"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-twitter"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-linkedin"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-pinterest"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-dribbble"></span></a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+            <!-- 
+              **==========
+              NOTE: 
+              Please don't remove this copyright link unless you buy the license here https://untree.co/license/  
+              **==========
+            -->
+
+            <p>
+              Copyright &copy;
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              . All Rights Reserved. &mdash; Designed with love by
+              <a href="https://untree.co">Untree.co</a>
+              <!-- License information: https://untree.co/license/ -->
+            </p>
+            <div>
+              Distributed by
+              <a href="https://themewagon.com/" target="_blank">themewagon</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container -->
+    </div>
+    <!-- /.site-footer -->
+{% endblock %}
